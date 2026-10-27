@@ -1,0 +1,138 @@
+c1
+
+config t
+vlan 25
+ name inspiro.com
+ exit
+Int vlan 25
+ no shut
+ ip add 10.0.8.1 255.255.248.0
+ip dhcp excluded-add 10.0.8.1 10.0.10.100
+ip dhcp pool inspiro.com
+ network 10.0.8.0 255.255.248.0
+ default-router 10.0.8.1
+ domain-name inspiro.com
+end
+
+a1
+
+config t
+ Int e0/0
+  swi mode access
+  swi access vlan 25
+end
+
+P1:
+conf t
+int e0/0
+ip add dhcp
+no shut
+end
+
+C2
+
+config t
+vlan 67
+ name JPmorgan.com
+ exit
+Int vlan 67
+ no shut
+ ip add 10.0.63.254 255.255.224.0
+ip dhcp excluded-add 10.0.32.1 10.0.35.0
+ip dhcp pool JPmorgan.com
+ network 10.0.32.0 255.255.224.0
+ default-router 10.0.63.254
+ domain-name JPmorgan.com
+end
+
+
+A2 
+
+config t
+ Int e1/0
+  swi mode access
+  swi access vlan 67
+end
+
+
+p2
+
+conf t
+int e1/0
+ip add0 dhcp
+no shut
+end
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Ex.5.3: Compute and Configure SYKESASIA.com
+call center with 388 Agents,Tls,QAs,Pm. using
+10.0.0.0/8:
+Convert: 388 is 9 bits
+Subract: /32 - /9 = /23 is 3rd,2i
+Ipasok: "ipasok 2i sa 3rd"
+Sykesasia: 10.0.2.0/23
+
+notSYKESasia: 10.0.4.0/23
+
+Ex.5.3: Compute and Configure ETELECARE.com
+call center with 4700 Agents,Tls,QAs,Pm. using
+10.0.0.0/8:
+Convert: 4700agents is 13bits
+Subract: /32 - /13 = /19 (3rd,32i)
+Ipasok: ipasok 32i sa 3rd.
+ETELECARE.com: 10.0.32.0/19
+1st: 10.0.32.1/19
+broadcast: 10.0.63.255/19
+notETELECARE.com: 10.0.64.0/19
+
+Ex.5.4: Compute and Configure  nbi.gov.ph
+call center with 220 Agents,Tls,QAs,Pm. using
+10.0.0.0/8:
+Convert 220 is 8bits
+Subract: /32 - /8 = /24, 3rd,1i
+Ipasok: ipasok ang 1i sa 3rd
+nbi.gov.ph: 10.0.1.0/24
+1st: 10.0.1.1
+broadcast: 10.0.1.255
+notnbi.gov.ph: 10.0.2.0/24
+
+Ex.5.4: Compute and Configure  doh.gov.ph
+call center with 10% of 58 Agents,Tls,QAs,Pm. using
+10.0.0.0/8:
+Convert: 58 is 6bits
+Subract: /32 - /6 = /26 4th,64i
+Ipasok: ipasok 64i sa 4th:
+doh.gov.ph:  10.0.0.64/26
+1st:  
+broadcast: 
+not-doh.gov.ph: 10.0.0.128
+
+##########################
+### job interview L2 #####
+##########################
+J.O: What is CIDR: classless interdomail Routing:
+L2 ENG: "what IP address will I Order to Get 45 IP address:, heres: Pen,Paper"
+YOU: "Sorry, I dont need Paper, Lets save trees: Brains: 32 - 6bits = /26
+sir we gonna use /26 with .64 as networkAddres. .65 - .127"
+
+L2Eng: " i need around 100 ip address, what slash / "
+you: "100 is 7 bits, brain: /32-/7 = /25, 4th,128i
+
+L2Eng: " i need around 19 ip address, what slash / "
+you: " 19 is 5 bits, sa utak atras 5, = /27 32i, .33 1st
+
+L2Eng: " our company needs a PointToPoint Link WAN what / will i use? "
+YOu" you mean a 2 ip address network, 32 - 2 = /30, .4network
+1st usable .5, and .6 broacast: .7

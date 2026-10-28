@@ -1,0 +1,121 @@
+
+
+R1                                                          
+
+conf t 
+no ip route 10.1.1.5 255.255.255.252 10.1.1.2
+no ip route 10.1.1.8 255.255.255.252 10.1.1.2
+
+end
+
+
+r3
+
+conf t 
+ip route 10.1.1.0 255.255.255.252  10.1.1.5
+
+
+end
+
+r4
+
+conf t 
+no ip route 10.1.1.0 255.255.255.252  10.1.1.9
+no ip route 10.1.1.4 255.255.255.252 10.1.1.9
+
+
+end
+
+r2: 
+
+conf t
+no ip route 10.1.1.5 255.255.255.252 10.1.1.10
+
+end
+
+
+
+
+conf t 
+hostname F1k-NET
+username admin privilege 15 secret pass
+no logging console
+line vty 0 4
+transport input all
+login local 
+end
+
+
+
+conf t
+username admin privilege 15 secret pass
+line vty 0 14
+transport input all
+exec-timeout 0 0
+login local
+end
+
+conf t
+no ip access-list standard NOPORN
+ip access-list standard NOPORN 
+DENY 66.254.0.0 0.0.255.255
+DENY 104.21.0.0 0.0.255.255	
+DENY 172.67.146.93 0.0.0.0
+DENY 104.16.4.81 0.0.0.0 
+DENY 89.222.127.8 0.0.0.0
+DENY 64.98.135.95 0.0.0.0
+DENY 208.77.0.0 0.0.255.25
+Permit any
+Int G1
+ip access-group NOPORN in
+end
+
+
+conf t
+int g1
+no ip access-group NOPORN IN
+end
+
+
+config t
+NO ip access-list standard NOISKUL
+ip access-list standard NOISKUL
+DENY   100.29.159.18   0.0.255.255
+DENY   172.66.161.211   0.0.255.255
+DENY   50.6.160.47   0.0.255.255
+DENY   184.168.125.216   0.0.255.255
+DENY   184.87.107.54   0.0.255.255
+Permit Any
+Int Gi 1
+ ip access-group NOISKUL in
+end
+
+conf t
+int g1
+no ip access
+
+
+config t
+NO ip access-list standard NOTORS
+ip access-list standard NOTORS
+DENY   162.159.104.21   0.0.255.255
+DENY   172.67.203.31   0.0.255.255
+DENY      0.0.255.255
+DENY   __.__.__.__   0.0.255.255
+DENY   __.__.__.__   0.0.255.255
+Permit Any
+Int Gi 1
+ ip access-group NOTORS in
+end
+
+
+
+
+
+
+
+
+
+
+
+

@@ -1,0 +1,31 @@
+configure terminal
+Enter configuration commands, one per line.  End with CNTL/Z.
+ap(config)#hostname aironet-21
+aironet-21(config)#dot11 ssid helloworld-21
+aironet-21(config-ssid)#vlan 21
+aironet-21(config-ssid)#authentication open
+aironet-21(config-ssid)#authentication key-management wpa
+aironet-21(config-ssid)#wpa-psk ascii C1sc0123
+aironet-21(config-ssid)#guest-mode
+aironet-21(config-ssid)#default Int Dot11Radio 0
+ default bridge-group 1 block-unknown-source <cr> not allowed on Dot11Radio0 interface
+ default bridge-group 1 subscriber-loop-control <cr> not allowed on Dot11Radio0 interface
+%command not allowed, cannot remove bridge-group 1Cannot disable station-role
+
+Interface Dot11Radio0 set to default configuration
+aironet-21(config)#default interface gigabitEthernet 0
+%command not allowed, cannot remove bridge-group 1
+Interface GigabitEthernet0 set to default configuration
+aironet-21(config)#int dot11radio 0
+aironet-21(config-if)#no shut
+aironet-21(config-if)#channel 2
+aironet-21(config-if)#encryption mode ciphers tkip
+aironet-21(config-if)#encryption vlan 21 mode ciphers tkip
+aironet-21(config-if)#ssid helloworld-21
+aironet-21(config-if)#exit
+aironet-21(config)#interface dot11radio 0.21
+aironet-21(config-subif)#encapsulation dot1q 21 native
+aironet-21(config-subif)#bridge-group 1
+aironet-21(config-subif)#exit
+aironet-21(config)#end
+aironet-21#
